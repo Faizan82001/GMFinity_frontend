@@ -1,3 +1,6 @@
+const apiUrl = JSON.parse(localStorage.getItem("config")).apiUrl;
+const frontEndUrl = JSON.parse(localStorage.getItem("config")).frontEndUrl;
+
 document.getElementById("username").addEventListener("input", validateUsername);
 document
     .getElementById("confirm_password")
@@ -64,14 +67,14 @@ function isValidEmail(email) {
 }
 
 function callApi(username, email, password) {
-    const apiUrl = "http://localhost:3000/api/users";
+    const apiCall = `${apiUrl}/users`;
 
     const data = {
         username: username,
         email: email,
         password: password,
     };
-    fetch(apiUrl, {
+    fetch(apiCall, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -88,7 +91,7 @@ function callApi(username, email, password) {
                 showToast(responseData.message);
                 document.getElementById("registration-form").reset();
                 window.location.href =
-                    "http://127.0.0.1:5500/frontend/login/login.html";
+                    `${frontEndUrl}/login/login.html`;
             }
         })
         .catch((error) => {

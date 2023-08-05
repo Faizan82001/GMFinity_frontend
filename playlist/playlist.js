@@ -1,5 +1,8 @@
+const apiUrl = JSON.parse(localStorage.getItem("config")).apiUrl;
+const frontEndUrl = JSON.parse(localStorage.getItem("config")).frontEndUrl;
+
 function goToHomePage() {
-    window.location.href = "http://127.0.0.1:5500/frontend/Home/home.html";
+    window.location.href = `${frontEndUrl}/Home/home.html`;
 }
 
 const currentUrl = window.location.href;
@@ -7,9 +10,9 @@ const urlParams = new URLSearchParams(currentUrl.split("?")[1]);
 const playlistName = urlParams.get("name");
 const playlistId = sessionStorage.getItem("playlistId");
 function fetchItemsFromPlaylist(playlistName) {
-    const apiUrl = `http://localhost:3000/api/playlists/playlist/${playlistName}`;
+    const apiCall = `${apiUrl}/playlists/playlist/${playlistName}`;
     const token = localStorage.getItem("token");
-    fetch(apiUrl, {
+    fetch(apiCall, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -122,13 +125,13 @@ function displayMovieList(movieList) {
 }
 
 function removeFromPlaylist(playlistId, movieId) {
-    const apiUrl = `http://localhost:3000/api/playlists/remove-from-playlist`;
+    const apiCall = `${apiUrl}/playlists/remove-from-playlist`;
     const token = localStorage.getItem("token");
     const data = {
         playlistId,
         movieId,
     };
-    fetch(apiUrl, {
+    fetch(apiCall, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -150,11 +153,3 @@ function removeFromPlaylist(playlistId, movieId) {
         });
 }
 
-function showToast(message) {
-    const toastElement = document.getElementById("toast");
-    toastElement.textContent = message;
-    toastElement.classList.add("show");
-    setTimeout(() => {
-        toastElement.classList.remove("show");
-    }, 3000);
-}

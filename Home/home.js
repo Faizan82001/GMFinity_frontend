@@ -1,4 +1,7 @@
 let movieData = [];
+const apiUrl = JSON.parse(localStorage.getItem("config")).apiUrl;
+const frontEndUrl = JSON.parse(localStorage.getItem("config")).frontEndUrl;
+
 function fetchSearchResults(searchQuery) {
     const apiUrl = `http://www.omdbapi.com/?t=${encodeURIComponent(
         searchQuery
@@ -74,9 +77,9 @@ document
     .addEventListener("click", handleSearch);
 
 function fetchPublicPlaylists() {
-    const apiUrl = "http://localhost:3000/api/playlists/public-playlists";
+    const apiCall = `${apiUrl}/playlists/public-playlists`;
     const token = localStorage.getItem("token");
-    fetch(apiUrl, {
+    fetch(apiCall, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -108,7 +111,7 @@ function displayPublicPlaylists(playlistsData) {
 
             playlistCard.addEventListener("click", () => {
                 sessionStorage.setItem("playlistId", playlist._id);
-                window.location.href = `http://127.0.0.1:5500/frontend/playlist/playlist.html?name=${playlist.name}`;
+                window.location.href = `${frontEndUrl}/playlist/playlist.html?name=${playlist.name}`;
             });
             const playlistTitle = document.createElement("h3");
             playlistTitle.textContent = playlist.name;
@@ -161,9 +164,9 @@ function toggleSidebar() {
 }
 
 function fetchPlaylists() {
-    const apiUrl = "http://localhost:3000/api/playlists";
+    const apiCall = `${apiUrl}/playlists`;
     const token = localStorage.getItem("token");
-    fetch(apiUrl, {
+    fetch(apiCall, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -190,7 +193,7 @@ function displayPlaylists(playlistsData) {
 
         playlistItem.addEventListener("click", () => {
             sessionStorage.setItem("playlistId", playlist._id);
-            window.location.href = `http://127.0.0.1:5500/frontend/playlist/playlist.html?name=${playlist.name}`;
+            window.location.href = `${frontEndUrl}/playlist/playlist.html?name=${playlist.name}`;
         });
 
         const playlistName = document.createElement("span");
@@ -245,13 +248,13 @@ function validatePlaylistForm(e) {
 }
 
 function createPlaylistApi(playlistName, isPublic) {
-    const apiUrl = "http://localhost:3000/api/playlists/playlist";
+    const apiCall = `${apiUrl}/playlists/playlist`;
     const token = localStorage.getItem("token");
     const data = {
         name: playlistName,
         isPublic,
     };
-    fetch(apiUrl, {
+    fetch(apiCall, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -339,13 +342,13 @@ function displayPlaylistsToAdd(data) {
 }
 
 function addToPlaylist(playlistId, movieData, addButton) {
-    const apiUrl = `http://localhost:3000/api/playlists/add-to-playlist`;
+    const apiCall = `${apiUrl}/playlists/add-to-playlist`;
     const token = localStorage.getItem("token");
     const data = {
         playlistId,
         movieData,
     };
-    fetch(apiUrl, {
+    fetch(apiCall, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

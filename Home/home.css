@@ -313,21 +313,6 @@ button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-.toast {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transform: translateY(-100%);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    z-index: 9999;
-}
-
 .show {
     opacity: 1;
     transform: translateY(0);

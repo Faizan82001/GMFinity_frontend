@@ -1,5 +1,7 @@
 let isValid = false;
 
+const apiUrl = JSON.parse(localStorage.getItem("config")).apiUrl;
+const frontEndUrl = JSON.parse(localStorage.getItem("config")).frontEndUrl;
 function validateForm(e) {
     e.preventDefault();
     const email = document.getElementById("email").value.trim();
@@ -15,13 +17,13 @@ function validateForm(e) {
 }
 
 function callApi(email, password) {
-    const apiUrl = "http://localhost:3000/api/login";
+    const apiCall = `${apiUrl}/login`;
 
     const data = {
         email: email,
         password: password,
     };
-    fetch(apiUrl, {
+    fetch(apiCall, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -41,7 +43,7 @@ function callApi(email, password) {
                 localStorage.setItem("user", JSON.stringify(responseData.user));
                 document.getElementById("login-form").reset();
                 window.location.href =
-                    "http://127.0.0.1:5500/frontend/Home/home.html";
+                    `${frontEndUrl}/Home/home.html`;
             }
         })
         .catch((error) => {
