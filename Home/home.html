@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="navbar-title">My Music App</div>
+        <div class="navbar-playlists" onclick="toggleSidebar()">Playlists</div>
+    </header>
+
+    <main class="main-content">
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search...">
+            <button id="search-button">Search</button>
+        </div>
+
+        <div class="movie-box" style="display: none;">
+            <div class="movie-header">
+                <h2 class="movie-title">Loading...</h2>
+                <span class="heart-icon"  onclick="openPlaylistModal()">&#10084;</span>
+            </div>
+            <div class="movie-content">
+                <img class="movie-poster" alt="Could not load image at the moment!!">
+                <div class="movie-details">
+                    <p class="imdb-rating">IMDb Rating: Loading...</p>
+                    <p class="released">Released: Loading...</p>
+                    <p class="runtime">Runtime: Loading...</p>
+                    <p class="genre">Genre: Loading...</p>
+                    <p class="director">Director: Loading...</p>
+                    <p class="actors">Actors: Loading...</p>
+                    <p class="plot">Plot: Loading...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="playlistModal">
+            <div class="modal-content">
+                <span class="close-modal" id="closePlaylistModal">&times;</span>
+                <h2>Add to Playlist</h2>
+                <div id="playlistContainer">
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 5%;">
+            <h2>Public Playlists</h2>
+            <hr>
+            <section class="public-playlists">
+            </section>
+        </div>
+
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>My Playlists</h3>
+                <span class="close-icon" onclick="toggleSidebar()">&times;</span>
+            </div>
+            <div class="playlist-list" id="playlist-list">
+            </div>
+            <div class="create-playlist-container">
+                <button class="create-playlist-button" id="createPlaylistButton">Create Playlist</button>
+            </div>
+        </aside>
+
+        <div class="modal" id="createPlaylistModal">
+            <div class="modal-content">
+                <span class="close-modal" id="closeModal">&times;</span>
+                <h2>Create Playlist</h2>
+                <form id="playlistForm" onsubmit="return validatePlaylistForm(event)" novalidate>
+                    <div class="form-group">
+                        <label for="playlistName">Playlist Name:</label>
+                        <div class="inline-error"><input type="text" id="playlistName" required>
+                            <span class="error" id="playlistName-error"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="publicToggle">Public:</label>
+                        <div class="toggle-container">
+                            <input type="checkbox" id="publicToggle">
+                            <label class="toggle" for="publicToggle"></label>
+                        </div>
+                    </div>
+                    <button type="submit">Create</button>
+                </form>
+            </div>
+        </div>
+        <div id="toast" class="toast"></div>
+    </main>
+</body>
+<script src="home.js"></script>
+
+</html>
