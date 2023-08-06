@@ -2,12 +2,19 @@ let movieData = [];
 const apiUrl = JSON.parse(localStorage.getItem("config")).apiUrl;
 const frontEndUrl = JSON.parse(localStorage.getItem("config")).frontEndUrl;
 
-function fetchSearchResults(searchQuery) {
-    const apiUrl = `http://www.omdbapi.com/?t=${encodeURIComponent(
-        searchQuery
-    )}&apikey=72c44cc6`;
+function fetchSearchResults() {
+    const searchInput = document.getElementById("search-input").value;
+    const searchYear = document.getElementById("search-year").value;
+    const token = localStorage.getItem("token");
 
-    fetch(apiUrl)
+    const apiCall = `${apiUrl}/movie?name=${searchInput}&year=${searchYear}`
+    fetch(apiCall, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${JSON.parse(token)}`,
+        },
+    })
         .then((response) => response.json())
         .then((data) => {
             if (data.Response === "True") {
@@ -45,9 +52,8 @@ function displayMovieDetails(movieData) {
 function handleSearch() {
     const searchInput = document.getElementById("search-input");
     const searchQuery = searchInput.value;
-
     if (searchQuery) {
-        fetchSearchResults(searchQuery);
+        fetchSearchResults();
     } else {
         hideMovieBox();
     }
@@ -70,6 +76,10 @@ document.getElementById("search-input").addEventListener("input", function () {
     } else {
         showMovieBox();
     }
+});
+
+document.getElementById("search-year").addEventListener("input", function () {
+    handleSearch();
 });
 
 document
@@ -111,7 +121,7 @@ function displayPublicPlaylists(playlistsData) {
 
             playlistCard.addEventListener("click", () => {
                 sessionStorage.setItem("playlistId", playlist._id);
-                window.location.href = `${frontEndUrl}/playlist/playlist.html?name=${playlist.name}`;
+                window.location.href = `${frontEndUrl}/playlist.html?name=${playlist.name}`;
             });
             const playlistTitle = document.createElement("h3");
             playlistTitle.textContent = playlist.name;
@@ -193,7 +203,7 @@ function displayPlaylists(playlistsData) {
 
         playlistItem.addEventListener("click", () => {
             sessionStorage.setItem("playlistId", playlist._id);
-            window.location.href = `${frontEndUrl}/playlist/playlist.html?name=${playlist.name}`;
+            window.location.href = `${frontEndUrl}/playlist.html?name=${playlist.name}`;
         });
 
         const playlistName = document.createElement("span");

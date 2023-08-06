@@ -149,7 +149,14 @@ function removeFromPlaylist(playlistId, movieId) {
             }
         })
         .catch((error) => {
-            showToast(error.error);
         });
 }
 
+function showToast(message) {
+    const toastElement = document.getElementById("toast");
+    toastElement.textContent = message;
+    toastElement.classList.add("show");
+    setTimeout(() => {
+        toastElement.classList.remove("show");
+    }, 3000);
+}

@@ -1,5 +1,4 @@
 let isValid = false;
-
 const apiUrl = JSON.parse(localStorage.getItem("config")).apiUrl;
 const frontEndUrl = JSON.parse(localStorage.getItem("config")).frontEndUrl;
 function validateForm(e) {

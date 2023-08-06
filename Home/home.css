@@ -249,8 +249,17 @@ label {
     width: 30%;
 }
 
-input[type="text"] {
+#search-input {
     width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#search-year {
+    margin-left: 2%;
+    width: 10%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -396,5 +405,9 @@ button[type="submit"]:hover {
 
     #search-input {
         width: 100%;
+    }
+
+    #search-year {
+        width: 20%;
     }
 }
