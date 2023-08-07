@@ -5,13 +5,11 @@ body {
     background-color: #f7f7f7;
 }
 
-/* Reset default margin and padding for body and header */
 header {
     margin: 0;
     padding: 0;
 }
 
-/* Common styles for navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -26,7 +24,6 @@ header {
     font-size: 24px;
     font-weight: bold;
     text-decoration: none;
-    /* Remove default underline */
 }
 
 .navbar-title:hover {
@@ -37,7 +34,6 @@ header {
     cursor: pointer;
     font-size: 18px;
     text-decoration: none;
-    /* Remove default underline */
 }
 
 .navbar-playlists:hover {
@@ -160,15 +156,22 @@ button:hover {
     transform: translateY(0);
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .profile {
         padding: 20px;
     }
 
     label {
+        font-size: 14px;
         width: 50%;
     }
+
+    input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    ;
 }
 
 @media (max-width: 480px) {
@@ -177,6 +180,26 @@ button:hover {
     }
 
     label {
-        width: 60%;
+        font-size: 14px;
+        width: 30%;
+    }
+
+    input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        padding: 3%;
+    }
+
+    .navbar-title {
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .navbar-playlists {
+        text-align: center;
     }
 }

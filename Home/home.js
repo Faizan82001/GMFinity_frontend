@@ -2,6 +2,12 @@ let movieData = [];
 const apiUrl = JSON.parse(localStorage.getItem("config")).apiUrl;
 const frontEndUrl = JSON.parse(localStorage.getItem("config")).frontEndUrl;
 
+function logout() {
+    window.history.forward();
+    window.location.href = `${frontEndUrl}/login/login.html`;
+    localStorage.clear();
+}
+
 function fetchSearchResults() {
     const searchInput = document.getElementById("search-input").value;
     const searchYear = document.getElementById("search-year").value;
@@ -121,7 +127,7 @@ function displayPublicPlaylists(playlistsData) {
 
             playlistCard.addEventListener("click", () => {
                 sessionStorage.setItem("playlistId", playlist._id);
-                window.location.href = `${frontEndUrl}/playlist.html?name=${playlist.name}`;
+                window.location.href = `${frontEndUrl}/playlist/playlist.html?name=${playlist.name}`;
             });
             const playlistTitle = document.createElement("h3");
             playlistTitle.textContent = playlist.name;
@@ -203,7 +209,7 @@ function displayPlaylists(playlistsData) {
 
         playlistItem.addEventListener("click", () => {
             sessionStorage.setItem("playlistId", playlist._id);
-            window.location.href = `${frontEndUrl}/playlist.html?name=${playlist.name}`;
+            window.location.href = `${frontEndUrl}/playlist/playlist.html?name=${playlist.name}`;
         });
 
         const playlistName = document.createElement("span");

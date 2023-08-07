@@ -38,6 +38,27 @@
 .heart-icon {
     font-size: 24px;
     cursor: pointer;
+    position: relative;
+}
+
+.heart-icon::before {
+    content: "Remove from Playlist";
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.heart-icon:hover::before {
+    opacity: 1;
 }
 
 .movie-content {
@@ -63,4 +84,30 @@
 
 .movie-details strong {
     font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .movie-box {
+        max-width: 100%;
+    }
+
+    .movie-title {
+        font-size: 18px;
+    }
+
+    .heart-icon {
+        font-size: 18px;
+    }
+
+    .movie-content {
+        padding: 10px;
+    }
+
+    .movie-poster {
+        width: 100px;
+    }
+
+    .movie-details p {
+        font-size: 12px;
+    }
 }

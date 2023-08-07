@@ -12,7 +12,10 @@
 <body>
     <header class="navbar">
         <div class="navbar-title">My Music App</div>
-        <div class="navbar-playlists" onclick="toggleSidebar()">Playlists</div>
+        <div class="right-items">
+            <div class="navbar-playlists" onclick="toggleSidebar()">Playlists</div>
+            <div class="navbar-logout" onclick="logout()">Logout</div>
+        </div>
     </header>
 
     <main class="main-content">
@@ -25,7 +28,7 @@
         <div class="movie-box" style="display: none;">
             <div class="movie-header">
                 <h2 class="movie-title">Loading...</h2>
-                <span class="heart-icon"  onclick="openPlaylistModal()">&#10084;</span>
+                <span class="heart-icon" onclick="openPlaylistModal()">&#10084;</span>
             </div>
             <div class="movie-content">
                 <img class="movie-poster" alt="Could not load image at the moment!!">

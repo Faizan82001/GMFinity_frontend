@@ -9,6 +9,7 @@ const currentUrl = window.location.href;
 const urlParams = new URLSearchParams(currentUrl.split("?")[1]);
 const playlistName = urlParams.get("name");
 const playlistId = sessionStorage.getItem("playlistId");
+
 function fetchItemsFromPlaylist(playlistName) {
     const apiCall = `${apiUrl}/playlists/playlist/${playlistName}`;
     const token = localStorage.getItem("token");
@@ -59,6 +60,7 @@ function displayMovieList(movieList) {
             heartIcon.classList.add("heart-icon");
             heartIcon.innerHTML = "&#x2764;&#xfe0f;";
             heartIcon.style.color = "red";
+            heartIcon.setAttribute("data-tooltip", "Remove From Playlist")
             heartIcon.addEventListener("click", () =>
                 removeFromPlaylist(playlistId, movie.imdbID)
             );
@@ -148,8 +150,18 @@ function removeFromPlaylist(playlistId, movieId) {
                 showToast(responseData.error);
             }
         })
-        .catch((error) => {
-        });
+        .catch((error) => {});
+}
+
+function sharePlaylist() {
+    const url = window.location.href;
+    const input = document.createElement("input");
+    input.value = url;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand("copy");
+    document.body.removeChild(input);
+    showToast("Page URL copied to clipboard!");
 }
 
 function showToast(message) {
